@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>İşe Giriş/Çıkış Sonuçları (Id ile) - Kanguru Api Dokümantasyonu</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".." target="_blank" class="custom-link">Kanguru Api Dokümantasyonu</a>
+</li>
+<li class="divider"></li>
+<li class="chapter" data-path="">
+<a href="..">Giriş</a>
+<li class="chapter" data-path="toplu-ise-giris-baslat/">
+<a href="../toplu-ise-giris-baslat/">Toplu İşe Giriş İşlemlerini Başlat</a>
+<li class="chapter" data-path="toplu-isten-cikis-baslat/">
+<a href="../toplu-isten-cikis-baslat/">Toplu İşten Çıkış İşlemlerini Başlat</a>
+<li class="chapter active" data-path="get-ise-giris-cikis-sonuc-by-id/">
+<a href="./">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-tarih/">
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+<section class="normal markdown-section">
+
+
+
+<h2 id="get-ise-giris-cikis-sonuc-by-id-get">get-ise-giris-cikis-sonuc-by-id (GET)</h2>
+<p>Bu endpoint'i kullanarak iki tarih aralığında gönderilen bildirimlerin sonuçlarını görebilirsiniz.</p>
+<p><strong>Sorgu Parametreleri</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secretKey</td>
+<td>Size verilen firmanıza ait secretKey</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Bildirm Id'si. Bu Id verilerinizi Kanguru sistemine ilettiğinizde size verilir.</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Örnek Çağrı</strong>
+https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secretkey=abc123&amp;id=1234</p>
+<p><strong>Cevap</strong></p>
+<pre><code>{
+  &quot;isSuccess&quot;: true,
+  &quot;errorMessage&quot;: null,
+  &quot;items&quot;: [
+    {
+      &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
+      &quot;statusId&quot;: 104,
+      &quot;errorMessage&quot;: null,
+      &quot;referansNo&quot;: &quot;REF123456&quot;,
+      &quot;bildirimId&quot;: 111,
+      &quot;isGiris&quot;: true
+    },
+    {
+      &quot;tcKimlikNo&quot;: &quot;10987654321&quot;,
+      &quot;statusId&quot;: 105,
+      &quot;errorMessage&quot;: &quot;lorem ipsum&quot;,
+      &quot;referansNo&quot;: null,
+      &quot;bildirimId&quot;: 1234,
+      &quot;isGiris&quot;: false
+    }
+  ]
+}
+</code></pre>
+<p><strong>Header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSuccess</td>
+<td><code>boolean</code></td>
+<td>İşlemin başarılı olup olmadığını belirtir</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Genel hata mesajı (varsa)</td>
+</tr>
+<tr>
+<td>items</td>
+<td><code>Item[]</code></td>
+<td>Detay sonuçların listesi</td>
+</tr>
+<tr>
+<td><strong>Item:</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>Kişinin T.C. Kimlik numarası</td>
+</tr>
+<tr>
+<td>statusId</td>
+<td><code>integer</code></td>
+<td>İşlem sonucu durum kodu (Detayı aşağıda)</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Kişiye özel hata mesajı (varsa)</td>
+</tr>
+<tr>
+<td>referansNo</td>
+<td><code>string</code></td>
+<td>Bildirime ait SGK'dan verilen referans numarası</td>
+</tr>
+<tr>
+<td>bildirimId</td>
+<td><code>integer</code></td>
+<td>Sistem tarafındaki bildirim ID’si</td>
+</tr>
+<tr>
+<td>isGiris</td>
+<td><code>boolean</code></td>
+<td><code>true</code>: Giriş bildirimi, <code>false</code>: Çıkış bildirimi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Status Değerleri</strong></p>
+<table>
+<thead>
+<tr>
+<th>StatusId</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>102</td>
+<td>Henüz SGK'ya bildirilmedi</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Veri tutarlığı kontrolünde Hata Aldı</td>
+</tr>
+<tr>
+<td>104</td>
+<td>SGK'ya başarıyla bildirildi</td>
+</tr>
+<tr>
+<td>105</td>
+<td>SGK sisteminde hata aldı</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+</body>
+</html>

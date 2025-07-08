@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Toplu İşten Çıkış İşlemlerini Başlat - Kanguru Api Dokümantasyonu</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".." target="_blank" class="custom-link">Kanguru Api Dokümantasyonu</a>
+</li>
+<li class="divider"></li>
+<li class="chapter" data-path="">
+<a href="..">Giriş</a>
+<li class="chapter" data-path="toplu-ise-giris-baslat/">
+<a href="../toplu-ise-giris-baslat/">Toplu İşe Giriş İşlemlerini Başlat</a>
+<li class="chapter active" data-path="toplu-isten-cikis-baslat/">
+<a href="./">Toplu İşten Çıkış İşlemlerini Başlat</a>
+<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-id/">
+<a href="../get-ise-giris-cikis-sonuc-by-id/">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-tarih/">
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+<section class="normal markdown-section">
+
+
+
+<h2 id="toplu-isten-cikis-baslat-post">toplu-isten-cikis-baslat (POST)</h2>
+<hr />
+<p>Bu endpoint'i kullanarak toplu işten çıkış işlemlerini yapabilirsiniz. Gönderdiğiniz veriler SGK'ya gönderilmeden önce bir dizi validasyon işlemlerinden geçecektir. Eğer verilerinizde bir hata ile karşılaşılırsa bu geri dönen cevapta 103 durum kodu ve hata içeriği ile beraber bildirilecektir. Eğer daha önce gönderdiğiniz ve başarılı ile SGK'ya girişi tamamlanmış verileri tekrar gönderirseniz Kanguru sistemi bunları göz ardı edece ve dönen cevapta ignoreCount içinde size bildirecektir.</p>
+<p>Bu aşamadaki "success" kavramı "Personel SGK'ya başarıyla bildirildi" anlamında değildir. "Kanguru'ya başarılı ile teslim edildi, validasyonlardan  geçti ve SGK'ya bildirilmeye hazır" anlamına gelmektedir. Kanguru kendisine iletilen iş taleplerini bir kuyruğa alır ve asenkron olarak çeşitli süreçlerde bu işlemler gerçekleşir. Verinin gönderildiği andaki sistem yoğunluğu, SGK sunucularının durumu,  listenin büyüklüğü süreleri etkiler. SGK'ya bildirilen işlerin sonucunu bu işlemin cevabında id'yi kullanarak get-ise-giris-cikis-sonuc-by-id endpoint'i üzerinden veya bildirim tarihi aralığı vererek get-ise-giris-cikis-sonuc-by-tarih endpoint'i öğrnebilirsiniz.</p>
+<h5 id="post-parametreleri">Post Parametreleri</h5>
+<h6 id="header">Header:</h6>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secretKey</td>
+<td><code>string</code></td>
+<td>API erişimi için kullanılan anahtar</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>liste</td>
+<td><code>Item[]</code></td>
+<td>İşten çıkış detaylarının listesi</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<h6 id="item">Item</h6>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sicilNo</td>
+<td><code>string</code></td>
+<td>Çıkış yapılacak işyerinin SGK sicil numarası 26 karakter olmalıdır. 12345678901234567890123000</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>nakilGidecegiSicilNo</td>
+<td><code>string</code></td>
+<td>Eğer nakil ise nakil gideceği işyerinin sicil numarası. 26 karakter olmalıdır.</td>
+<td></td>
+</tr>
+<tr>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>11 karakterli TC Kimlik numarasıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>ad</td>
+<td><code>string</code></td>
+<td>Personelin adı ve soyadı.</td>
+<td></td>
+</tr>
+<tr>
+<td>istenCikisTarihiStr</td>
+<td><code>string</code></td>
+<td>İşten çıkış tarihi. YYYY-MM-DD formatında string olmalıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>ayrilisNedenKodu</td>
+<td><code>byte?</code></td>
+<td>Ayrılış nedeni kodu 1-50 arası bir değer olmalıdır.  Detaylarını aşağıda görebilirsiniz.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>csgbIsKolu</td>
+<td><code>string</code></td>
+<td>Çıkış yapılan işyerinin Çalışma ve Sosyal Güvenlik Bakanlığı İşkolu dur. 0-20 arasında sayısal bir değer olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>meslekKodu</td>
+<td><code>string</code></td>
+<td>Sigortalının meslek kodudur. Nokta ve sayılardan oluşan 7 karakterli sayısal değerdir. İlk dört karakter sayısal değerdir. Beşinci karakter nokta olup sonraki iki karakter de sayısal değerdir.  Örnek  : 3258.02</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>mevcutDonemBelgeNo</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki belge numarası</td>
+<td></td>
+</tr>
+<tr>
+<td>mevcutDonemUcret</td>
+<td><code>decimal?</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki ücreti</td>
+<td></td>
+</tr>
+<tr>
+<td>mevcutDonemIkramiye</td>
+<td><code>decimal?</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki ikramiyesi</td>
+<td></td>
+</tr>
+<tr>
+<td>mevcutDonemEksikGun</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki eksik gün sayısı</td>
+<td></td>
+</tr>
+<tr>
+<td>mevcutDonemEksikGunNeden</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki eksik gün nedeni</td>
+<td></td>
+</tr>
+<tr>
+<td>oncekiDonemBelgeNo</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait belge numarası</td>
+<td></td>
+</tr>
+<tr>
+<td>oncekiDonemUcret</td>
+<td><code>decimal?</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait ücreti</td>
+<td></td>
+</tr>
+<tr>
+<td>oncekiDonemIkramiye</td>
+<td><code>decimal?</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait ikramiyesi</td>
+<td></td>
+</tr>
+<tr>
+<td>oncekiDonemEksikGun</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait eksik gün sayısı</td>
+<td></td>
+</tr>
+<tr>
+<td>oncekiDonemEksikGunNeden</td>
+<td><code>byte?</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait eksik gün nedeni</td>
+<td></td>
+</tr>
+<tr>
+<td>isYuzdeUsulu</td>
+<td><code>bool?</code></td>
+<td>Sigortalı yüzde usülü çalışmışsa E , değilse H yazılmalıdır. E,H karakterleri dışında herhangi bir değer kabul edilmez. Boş bırakılırsa veya null değer gönderilirse "H" olarak işlem görür.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="request">Request</h5>
+<p>https://api.teknokanguru.com.tr/externalapi/toplu-isten-cikis-baslat</p>
+<h6 id="ornek">Örnek</h6>
+<pre><code>{
+  &quot;secretKey&quot;: &quot;your-secret-key&quot;,
+  &quot;liste&quot;: [
+    {
+      &quot;sicilNo&quot;: &quot;12345&quot;,
+      &quot;nakilGidecegiSicilNo&quot;: &quot;67890&quot;,
+      &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
+      &quot;ad&quot;: &quot;Ahmet&quot;,
+      &quot;istenCikisTarihiStr&quot;: &quot;2024-07-01&quot;,
+      &quot;ayrilisNedenKodu&quot;: 5,
+      &quot;csgbIsKolu&quot;: &quot;20&quot;,
+      &quot;meslekKodu&quot;: &quot;2511.01&quot;,
+      &quot;mevcutDonemBelgeNo&quot;: 1,
+      &quot;mevcutDonemUcret&quot;: 5000.75,
+      &quot;mevcutDonemIkramiye&quot;: null,
+      &quot;mevcutDonemEksikGun&quot;: null,
+      &quot;mevcutDonemEksikGunNeden&quot;: null,
+      &quot;oncekiDonemBelgeNo&quot;: null,
+      &quot;oncekiDonemUcret&quot;: null,
+      &quot;oncekiDonemIkramiye&quot;: null,
+      &quot;oncekiDonemEksikGun&quot;: null,
+      &quot;oncekiDonemEksikGunNeden&quot;: null,
+      &quot;isYuzdeUsulu&quot;: false
+    }
+  ]
+}
+</code></pre>
+<h6 id="response">Response</h6>
+<pre><code>{
+  &quot;id&quot;: 98765,
+  &quot;isSuccess&quot;: true,
+  &quot;errorMessage&quot;: null,
+  &quot;successCount&quot;: 3,
+  &quot;ignoreCount&quot;: 1,
+  &quot;errorCount&quot;: 2,
+  &quot;ignoreTcs&quot;: [
+    &quot;11111111111&quot;
+  ],
+  &quot;successTcs&quot;: [
+    &quot;22222222222&quot;,
+    &quot;33333333333&quot;,
+    &quot;44444444444&quot;
+  ],
+  &quot;errors&quot;: [
+    {
+      &quot;tcKimlikNo&quot;: &quot;55555555555&quot;,
+      &quot;errorMessage&quot;: &quot;Eksik sigorta kolu&quot;
+    },
+    {
+      &quot;tcKimlikNo&quot;: &quot;66666666666&quot;,
+      &quot;errorMessage&quot;: &quot;Geçersiz giriş tarihi&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>Header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSuccess</td>
+<td><code>boolean</code></td>
+<td>İşlem başarılı mı.</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Genel hata mesajı (varsa)</td>
+</tr>
+<tr>
+<td>successCount</td>
+<td><code>integer</code></td>
+<td>Başarıyla işlenen kayıt sayısı</td>
+</tr>
+<tr>
+<td>ignoreCount</td>
+<td><code>integer</code></td>
+<td>Göz ardı edilen kayıt sayısı</td>
+</tr>
+<tr>
+<td>errorCount</td>
+<td><code>integer</code></td>
+<td>Hatalı kayıt sayısı</td>
+</tr>
+<tr>
+<td>ignoreTcs</td>
+<td><code>List&lt;string&gt;</code></td>
+<td>Göz ardı edilen T.C. Kimlik numaraları</td>
+</tr>
+<tr>
+<td>successTcs</td>
+<td><code>List&lt;string&gt;</code></td>
+<td>Başarıyla bildirilen T.C. Kimlik numaraları</td>
+</tr>
+<tr>
+<td>id</td>
+<td><code>integer</code></td>
+<td>İşleme ait benzersiz işlem ID’si. Bu id ile ilerleyen zamanlarda get-ise-giris-cikis-sonuc-by-id endpoint'ini çağırarak işlemlerin sonucunu alabilirsiniz.</td>
+</tr>
+<tr>
+<td>errors</td>
+<td><code>ErrorItem[]</code></td>
+<td>Hata detay listesi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ErrorItem:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>Kişinin T.C. Kimlik numarası</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Kişiye özel hata mesajı</td>
+</tr>
+</tbody>
+</table>
+<h4 id="acklamalar">Açıklamalar</h4>
+<p><strong>ÇSGB İş Kolu</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>AVCILIK, BALIKÇILIK, TARIM VE ORMANCILIK</td>
+</tr>
+<tr>
+<td>02</td>
+<td>GIDA SANAYİİ</td>
+</tr>
+<tr>
+<td>03</td>
+<td>MADENCİLİK VE TAŞ OCAKLARI</td>
+</tr>
+<tr>
+<td>04</td>
+<td>PETROL, KİMYA, LASTİK, PLASTİK VE İLAÇ</td>
+</tr>
+<tr>
+<td>05</td>
+<td>DOKUMA, HAZIR GİYİM VE DERİ</td>
+</tr>
+<tr>
+<td>06</td>
+<td>AĞAÇ VE KÂĞIT</td>
+</tr>
+<tr>
+<td>07</td>
+<td>İLETİŞİM</td>
+</tr>
+<tr>
+<td>08</td>
+<td>BASIN, YAYIN VE GAZETECİLİK</td>
+</tr>
+<tr>
+<td>09</td>
+<td>BANKA, FİNANS VE SİGORTA</td>
+</tr>
+<tr>
+<td>10</td>
+<td>TİCARET, BÜRO, EĞİTİM VE GÜZEL SANATLAR</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ÇİMENTO, TOPRAK VE CAM</td>
+</tr>
+<tr>
+<td>12</td>
+<td>METAL</td>
+</tr>
+<tr>
+<td>13</td>
+<td>İNŞAAT</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ENERJİ</td>
+</tr>
+<tr>
+<td>15</td>
+<td>TAŞIMACILIK</td>
+</tr>
+<tr>
+<td>16</td>
+<td>GEMİ YAPIMI VE DENİZ TAŞIMACILIĞI, ARDİYE VE ANTREPOCULUK</td>
+</tr>
+<tr>
+<td>17</td>
+<td>SAĞLIK VE SOSYAL HİZMETLER</td>
+</tr>
+<tr>
+<td>18</td>
+<td>KONAKLAMA VE EĞLENCE İŞLERİ</td>
+</tr>
+<tr>
+<td>19</td>
+<td>SAVUNMA VE GÜVENLİK</td>
+</tr>
+<tr>
+<td>20</td>
+<td>GENEL İŞLER</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ayrılış Nedenleri</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Deneme süreli iş sözleşmesinin işverence feshi</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Deneme süreli iş sözleşmesinin işçi tarafından feshi</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Belirsiz süreli iş sözleşmesinin işçi tarafından feshi (istifa)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Belirsiz süreli iş sözleşmesinin işveren tarafından haklı sebep bildirilmeden feshi</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Belirli süreli iş sözleşmesinin sona ermesi</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Emeklilik (yaşlılık) veya toptan ödeme nedeniyle</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Malulen emeklilik nedeniyle</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Ölüm</td>
+</tr>
+<tr>
+<td>11</td>
+<td>İş kazası sonucu ölüm</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Askerlik</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Kadın işçinin evlenmesi</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Emeklilik için yaş dışında diğer şartların tamamlanması</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Toplu işçi çıkarma</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Sözleşme sona ermeden sigortalının aynı işverene ait diğer işyerine nakli</td>
+</tr>
+<tr>
+<td>17</td>
+<td>İşyerinin kapanması</td>
+</tr>
+<tr>
+<td>18</td>
+<td>İşin sona ermesi</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Mevsim bitimi (İş akdinin askıya alınması halinde kullanılır. Tekrar başlatılmayacaksa "4" nolu kod kullanılır)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Kampanya bitimi (İş akdinin askıya alınması halinde kullanılır. Tekrar başlatılmayacaksa "4" nolu kod kullanılır)</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Statü değişikliği</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Diğer nedenler</td>
+</tr>
+<tr>
+<td>23</td>
+<td>İşçi tarafından zorunlu nedenle fesih</td>
+</tr>
+<tr>
+<td>24</td>
+<td>İşçi tarafından sağlık nedeniyle fesih</td>
+</tr>
+<tr>
+<td>25</td>
+<td>İşçi tarafından işverenin ahlak ve iyiniyet kurallarına aykırı davranışı nedeniyle fesih</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Disiplin kurulu kararı ile fesih</td>
+</tr>
+<tr>
+<td>27</td>
+<td>İşveren tarafından zorunlu nedenlerle ve tutukluluk nedeniyle fesih</td>
+</tr>
+<tr>
+<td>28</td>
+<td>İşveren tarafından sağlık nedeni ile fesih</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Vize süresinin bitimi (İş akdinin askıya alınması halinde kullanılır. Tekrar başlatılmayacaksa "4" nolu kod kullanılır)</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Borçlar Kanunu, Sendikalar Kanunu, Grev ve Lokavt Kanunu kapsamında kendi istek ve kusuru dışında fesih</td>
+</tr>
+<tr>
+<td>32</td>
+<td>4046 sayılı Kanunun 21. maddesine göre özelleştirme nedeni ile fesih</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Gazeteci tarafından sözleşmenin feshi</td>
+</tr>
+<tr>
+<td>34</td>
+<td>İşyerinin devri, işin veya işyerinin niteliğinin değişmesi nedeniyle fesih</td>
+</tr>
+<tr>
+<td>37</td>
+<td>KHK ile kamu görevinden çıkarma</td>
+</tr>
+<tr>
+<td>38</td>
+<td>Doğum nedeniyle işten ayrılma</td>
+</tr>
+<tr>
+<td>39</td>
+<td>696 KHK ile kamu işçiliğine geçiş</td>
+</tr>
+<tr>
+<td>40</td>
+<td>696 KHK ile kamu işçiliğine geçilememesi sebebiyle çıkış</td>
+</tr>
+<tr>
+<td>42</td>
+<td>4857/25-II-A</td>
+</tr>
+<tr>
+<td>43</td>
+<td>4857/25-II-B</td>
+</tr>
+<tr>
+<td>44</td>
+<td>4857/25-II-C</td>
+</tr>
+<tr>
+<td>45</td>
+<td>4857/25-II-D</td>
+</tr>
+<tr>
+<td>46</td>
+<td>4857/25-II-E</td>
+</tr>
+<tr>
+<td>47</td>
+<td>4857/25-II-F</td>
+</tr>
+<tr>
+<td>48</td>
+<td>4857/25-II-G</td>
+</tr>
+<tr>
+<td>49</td>
+<td>4857/25-II-H</td>
+</tr>
+<tr>
+<td>50</td>
+<td>4857/25-II-I</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Eksik Gün Nedenleri</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>İstirahat</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Disiplin cezası</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Gözaltına alınma</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Tutukluluk</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Kısmi istihdam</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Puantaj kayıtları</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Grev</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Lokavt</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Genel hayatı etkileyen olaylar</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Doğal afet</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Birden fazla</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Diğer Nedenler</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Devamsızlık</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Fesih tarihinde çalışmamış</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Ev hizmetlerinde 30 günden az çalışma</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Kısa çalışma ödeneği</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Ücretsiz doğum izni</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Ücretsiz yol izni</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Diğer ücretsiz izin</td>
+</tr>
+<tr>
+<td>22</td>
+<td>5434 SK ek 76, GM 192</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Yarım çalışma ödeneği</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Yarım çalışma ödeneği ve diğer nedenler</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Diğer Belge/Kanun Türlerinden Gün Tamamlama</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Kısmi İstihdama İzin Verilen Yabancı Uyruklu</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Kısa Çalışma Ödeneği Ve Diğer Nedenler</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+</body>
+</html>

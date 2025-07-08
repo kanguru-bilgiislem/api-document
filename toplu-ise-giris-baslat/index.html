@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Toplu İşe Giriş İşlemlerini Başlat - Kanguru Api Dokümantasyonu</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".." target="_blank" class="custom-link">Kanguru Api Dokümantasyonu</a>
+</li>
+<li class="divider"></li>
+<li class="chapter" data-path="">
+<a href="..">Giriş</a>
+<li class="chapter active" data-path="toplu-ise-giris-baslat/">
+<a href="./">Toplu İşe Giriş İşlemlerini Başlat</a>
+<li class="chapter" data-path="toplu-isten-cikis-baslat/">
+<a href="../toplu-isten-cikis-baslat/">Toplu İşten Çıkış İşlemlerini Başlat</a>
+<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-id/">
+<a href="../get-ise-giris-cikis-sonuc-by-id/">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-tarih/">
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+<section class="normal markdown-section">
+
+
+
+<h2 id="toplu-ise-giris-baslat-post">toplu-ise-giris-baslat (POST)**</h2>
+<hr />
+<p>Bu endpoint'i kullanarak toplu işe giriş işlemlerini yapabilirsiniz. Gönderdiğiniz veriler SGK'ya gönderilmeden önce bir dizi validasyon işlemlerinden geçecektir. Eğer verilerinizde bir hata ile karşılaşılırsa bu geri dönen cevapta 103 durum kodu ve hata içeriği ile beraber bildirilecektir. Eğer daha önce gönderdiğiniz ve başarılı ile SGK'ya girişi tamamlanmış verileri tekrar gönderirseniz Kanguru sistemi bunları göz ardı edece ve dönen cevapta ignoreCount içinde size bildirecektir.</p>
+<p>Bu aşamadaki "success" kavramı "Personel SGK'ya başarıyla bildirildi" anlamında değildir. "Kanguru'ya başarılı ile teslim edildi, validasyonlardan  geçti ve SGK'ya bildirilmeye hazır" anlamına gelmektedir. Kanguru kendisine iletilen iş taleplerini bir kuyruğa alır ve asenkron olarak çeşitli süreçlerde bu işlemler gerçekleşir.  Verinin gönderildiği andaki sistem yoğunluğu, SGK sunucularının durumu,  listenin büyüklüğü süreleri etkiler. SGK'ya bildirilen işlerin sonucunu bu işlemin cevabında id'yi kullanarak get-ise-giris-cikis-sonuc-by-id endpoint'i üzerinden veya bildirim tarihi aralığı vererek get-ise-giris-cikis-sonuc-by-tarih endpoint'i öğrnebilirsiniz.</p>
+<p><strong>Post Parametreleri</strong></p>
+<h6 id="header">Header:</h6>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secretKey</td>
+<td><code>string</code></td>
+<td>API erişimi için kullanılan anahtar</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>liste</td>
+<td><code>Item[]</code></td>
+<td>İşe giriş detaylarının listesi</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<h6 id="item">Item</h6>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sicilNo</td>
+<td><code>string</code></td>
+<td>Giriş yapılacak işyerinin SGK sicil numarası 26 karakter olmalıdır. 12345678901234567890123000</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>nakilGeldigiSicilNo</td>
+<td><code>string</code></td>
+<td>Eğer nakil ise nakil geldiği işyerinin sicil numarası. 26 karakter olmalıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>11 karakterli TC Kimlik numarasıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>ad</td>
+<td><code>string</code></td>
+<td>Sigortalının isim bilgisidir. En fazla 50 karakter olarak yazılmalıdır. Kurum kayıtları ile eşleşmediği durumda TC kimlik numarası dikkate alınarak işlem yapılır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>soyad</td>
+<td><code>string</code></td>
+<td>Sigortalının soyad bilgisidir. En fazla 50 karakter olarak yazılmalıdır. Kurum kayıtları ile eşleşmediği durumda TC kimlik numarası dikkate alınarak işlem yapılır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>iseGirisTarihiStr</td>
+<td><code>string</code></td>
+<td>İşe giriş tarihi. YYYY-MM-DD formatında string olmalıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>sigortaKolu</td>
+<td><code>string</code></td>
+<td>Personele ait sigorta koludur. 0 ,7,8 12,14,16,17,18,19,24,25,32 değerlerinden biri olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>ozurluKodu</td>
+<td><code>string</code></td>
+<td>Sigortalı engelli ise E , değilse H yazılmalıdır. E,H karakterleri dışında herhangi bir değer kabul edilmez. Boş bırakılırsa veya null değer gönderilirse "H" olarak işlem görür.</td>
+<td></td>
+</tr>
+<tr>
+<td>eskiHukumlu</td>
+<td><code>string</code></td>
+<td>Sigortalı eski hükümlü ise E , değilse H yazılmalıdır. E,H karakterleri dışında herhangi bir değer kabul edilmez.  Boş bırakılırsa veya null değer gönderilirse "H" olarak işlem görür.</td>
+<td></td>
+</tr>
+<tr>
+<td>ogrenimKodu</td>
+<td><code>string</code></td>
+<td>Sigortalıya ait öğrenim durumunu belirtir. 0-7 arasında sayısal bir değer olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>mezuniyetYili</td>
+<td><code>string</code></td>
+<td>Sigortalının mezun olduğu yılı belirtir. 0 ile 9999 arasında sayısal bir değer olmalıdır. Boş bırakılırsa veya null değer gönderilirse 0 olarak işlem görür.</td>
+<td></td>
+</tr>
+<tr>
+<td>mezuniyetBolumu</td>
+<td><code>string</code></td>
+<td>Sigortalının mezun olduğu bölümü belirtir. En fazla 100 karakter olabilir.</td>
+<td></td>
+</tr>
+<tr>
+<td>csgbIsKolu</td>
+<td><code>string</code></td>
+<td>Giriş yapılan işyerinin Çalışma ve Sosyal Güvenlik Bakanlığı İşkolu dur. 0-20 arasında sayısal bir değer olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>meslekKodu</td>
+<td><code>string</code></td>
+<td>Sigortalının meslek kodudur. Nokta ve sayılardan oluşan 7 karakterli sayısal değerdir. İlk dört karakter sayısal değerdir. Beşinci karakter nokta olup sonraki iki karakter de sayısal değerdir.  Örnek  : 3258.02</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>gorevKodu</td>
+<td><code>string</code></td>
+<td>2821 sayılı kanun gereğince belirlenen sigortalının görev kodudur. 1-6 arasında sayısal bir değer olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
+<td></td>
+</tr>
+<tr>
+<td>kismiCalisma</td>
+<td><code>string</code></td>
+<td>Sigortalı 30 gün altında çalışacaksa E , değilse H yazılmalıdır. E,H karakterleri dışında herhangi bir değer kabul edilmez. Boş bırakılırsa veya null değer gönderilirse "H" olarak işlem görür.</td>
+<td></td>
+</tr>
+<tr>
+<td>kismiCalismaGunSayisi</td>
+<td><code>string</code></td>
+<td>Kısmi çalışma alanı E değerini almışsa, bu alanın değeri çalışma gün sayısı 1 ile 29 arasında olmalıdır.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="request">Request</h5>
+<p>https://api.teknokanguru.com.tr/externalapi/toplu-ise-giris-baslat</p>
+<h6 id="ornek">Örnek</h6>
+<pre><code>{
+  &quot;secretKey&quot;: &quot;secret-key&quot;,
+  &quot;liste&quot;: [
+    {
+      &quot;sicilNo&quot;: &quot;12345678901234567890123000&quot;,
+      &quot;nakilGeldigiSicilNo&quot;: null,
+      &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
+      &quot;ad&quot;: &quot;Ali&quot;,
+      &quot;soyad&quot;: &quot;Yılmaz&quot;,
+      &quot;iseGirisTarihiStr&quot;: &quot;2024-01-15&quot;,
+      &quot;sigortaKolu&quot;: &quot;0&quot;,
+      &quot;ozurluKodu&quot;: &quot;H&quot;,
+      &quot;eskiHukumlu&quot;: &quot;H&quot;,
+      &quot;ogrenimKodu&quot;: &quot;0&quot;,
+      &quot;mezuniyetYili&quot;: &quot;2022&quot;,
+      &quot;mezuniyetBolumu&quot;: &quot;Bilgisayar Mühendisliği&quot;,
+      &quot;csgbIsKolu&quot;: &quot;20&quot;,
+      &quot;meslekKodu&quot;: &quot;2511.01&quot;,
+      &quot;gorevKodu&quot;: &quot;2&quot;,
+      &quot;kismiCalisma&quot;: &quot;H&quot;,
+      &quot;kismiCalismaGunSayisi&quot;: null
+    }
+  ]
+}
+
+</code></pre>
+<h6 id="response">Response</h6>
+<pre><code>{
+  &quot;id&quot;: 98765,
+  &quot;isSuccess&quot;: true,
+  &quot;errorMessage&quot;: null,
+  &quot;successCount&quot;: 3,
+  &quot;ignoreCount&quot;: 1,
+  &quot;errorCount&quot;: 2,
+  &quot;ignoreTcs&quot;: [
+    &quot;11111111111&quot;
+  ],
+  &quot;successTcs&quot;: [
+    &quot;22222222222&quot;,
+    &quot;33333333333&quot;,
+    &quot;44444444444&quot;
+  ],
+  &quot;errors&quot;: [
+    {
+      &quot;tcKimlikNo&quot;: &quot;55555555555&quot;,
+      &quot;errorMessage&quot;: &quot;Eksik sigorta kolu&quot;
+    },
+    {
+      &quot;tcKimlikNo&quot;: &quot;66666666666&quot;,
+      &quot;errorMessage&quot;: &quot;Geçersiz giriş tarihi&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>Header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSuccess</td>
+<td><code>boolean</code></td>
+<td>İşlem başarılı mı.</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Genel hata mesajı (varsa)</td>
+</tr>
+<tr>
+<td>successCount</td>
+<td><code>integer</code></td>
+<td>Başarıyla işlenen kayıt sayısı</td>
+</tr>
+<tr>
+<td>ignoreCount</td>
+<td><code>integer</code></td>
+<td>Göz ardı edilen kayıt sayısı</td>
+</tr>
+<tr>
+<td>errorCount</td>
+<td><code>integer</code></td>
+<td>Hatalı kayıt sayısı</td>
+</tr>
+<tr>
+<td>ignoreTcs</td>
+<td><code>List&lt;string&gt;</code></td>
+<td>Göz ardı edilen T.C. Kimlik numaraları</td>
+</tr>
+<tr>
+<td>successTcs</td>
+<td><code>List&lt;string&gt;</code></td>
+<td>Başarıyla bildirilen T.C. Kimlik numaraları</td>
+</tr>
+<tr>
+<td>id</td>
+<td><code>integer</code></td>
+<td>İşleme ait benzersiz işlem ID’si. Bu id ile ilerleyen zamanlarda get-ise-giris-cikis-sonuc-by-id endpoint'ini çağırarak işlemlerin sonucunu alabilirsiniz.</td>
+</tr>
+<tr>
+<td>errors</td>
+<td><code>ErrorItem[]</code></td>
+<td>Hata detay listesi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ErrorItem:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>Kişinin T.C. Kimlik numarası</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Kişiye özel hata mesajı</td>
+</tr>
+</tbody>
+</table>
+<h4 id="acklamalar">Açıklamalar</h4>
+<p><strong>Sigorta Kolu</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Mecburi Sigortalı</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Çıraklar</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sosyal Güvenlik Destek Primi</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Uluslararası Sözleşmesi Olmayan Yabancı Uyruklu Sigortalı</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Ceza Evi Çalışanı</td>
+</tr>
+<tr>
+<td>16</td>
+<td>İşkur Kursiyerleri</td>
+</tr>
+<tr>
+<td>17</td>
+<td>İş kaybı Tazminatı Alanlar</td>
+</tr>
+<tr>
+<td>18</td>
+<td>YOK Kısmi İstihdam</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Stajyer Öğrenciler</td>
+</tr>
+<tr>
+<td>24</td>
+<td>İntörn Öğrenci</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Harp m. Vazife m. 2330 ve 3713 SK göre aylık alan</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Bursiyer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Öğrenim Kodu</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Bilinmeyen</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Okur yazar değil</td>
+</tr>
+<tr>
+<td>2</td>
+<td>İlkokul</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ortaokul ya da İ.Ö.O</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lise veya dengi okul</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Yüksek okul veya fakülte</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Yüksek lisans</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Doktora</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ÇSGB İş Kolu</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>AVCILIK, BALIKÇILIK, TARIM VE ORMANCILIK</td>
+</tr>
+<tr>
+<td>02</td>
+<td>GIDA SANAYİİ</td>
+</tr>
+<tr>
+<td>03</td>
+<td>MADENCİLİK VE TAŞ OCAKLARI</td>
+</tr>
+<tr>
+<td>04</td>
+<td>PETROL, KİMYA, LASTİK, PLASTİK VE İLAÇ</td>
+</tr>
+<tr>
+<td>05</td>
+<td>DOKUMA, HAZIR GİYİM VE DERİ</td>
+</tr>
+<tr>
+<td>06</td>
+<td>AĞAÇ VE KÂĞIT</td>
+</tr>
+<tr>
+<td>07</td>
+<td>İLETİŞİM</td>
+</tr>
+<tr>
+<td>08</td>
+<td>BASIN, YAYIN VE GAZETECİLİK</td>
+</tr>
+<tr>
+<td>09</td>
+<td>BANKA, FİNANS VE SİGORTA</td>
+</tr>
+<tr>
+<td>10</td>
+<td>TİCARET, BÜRO, EĞİTİM VE GÜZEL SANATLAR</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ÇİMENTO, TOPRAK VE CAM</td>
+</tr>
+<tr>
+<td>12</td>
+<td>METAL</td>
+</tr>
+<tr>
+<td>13</td>
+<td>İNŞAAT</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ENERJİ</td>
+</tr>
+<tr>
+<td>15</td>
+<td>TAŞIMACILIK</td>
+</tr>
+<tr>
+<td>16</td>
+<td>GEMİ YAPIMI VE DENİZ TAŞIMACILIĞI, ARDİYE VE ANTREPOCULUK</td>
+</tr>
+<tr>
+<td>17</td>
+<td>SAĞLIK VE SOSYAL HİZMETLER</td>
+</tr>
+<tr>
+<td>18</td>
+<td>KONAKLAMA VE EĞLENCE İŞLERİ</td>
+</tr>
+<tr>
+<td>19</td>
+<td>SAVUNMA VE GÜVENLİK</td>
+</tr>
+<tr>
+<td>20</td>
+<td>GENEL İŞLER</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Görev Kodu</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kod</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>İşveren veya vekili</td>
+</tr>
+<tr>
+<td>2</td>
+<td>İşçi</td>
+</tr>
+<tr>
+<td>3</td>
+<td>657 SK (4/b) kapsamında çalışanlar</td>
+</tr>
+<tr>
+<td>4</td>
+<td>657 SK (4/c) kapsamında çalışanlar</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Çıraklar ve stajer öğrenciler</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Diğerleri</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+</body>
+</html>
