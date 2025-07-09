@@ -170,14 +170,14 @@ Theme by GitBook
 <td></td>
 </tr>
 <tr>
-<td>istenCikisTarihiStr</td>
+<td>istenCikisTarihi</td>
 <td><code>string</code></td>
 <td>İşten çıkış tarihi. YYYY-MM-DD formatında string olmalıdır.</td>
 <td>✔️</td>
 </tr>
 <tr>
 <td>ayrilisNedenKodu</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Ayrılış nedeni kodu 1-50 arası bir değer olmalıdır.  Detaylarını aşağıda görebilirsiniz.</td>
 <td>✔️</td>
 </tr>
@@ -195,67 +195,67 @@ Theme by GitBook
 </tr>
 <tr>
 <td>mevcutDonemBelgeNo</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihe ait dönemdeki belge numarası</td>
 <td></td>
 </tr>
 <tr>
 <td>mevcutDonemUcret</td>
-<td><code>decimal?</code></td>
-<td>Çıkış yapılacak tarihe ait dönemdeki ücreti</td>
+<td><code>string</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki ücreti. Değerin ondalık karakteri olmalıdır ve binlik değerler için ayraç kullanılmamalıdır. 123456.78 gibi.</td>
 <td></td>
 </tr>
 <tr>
 <td>mevcutDonemIkramiye</td>
-<td><code>decimal?</code></td>
-<td>Çıkış yapılacak tarihe ait dönemdeki ikramiyesi</td>
+<td><code>string</code></td>
+<td>Çıkış yapılacak tarihe ait dönemdeki ikramiyesi. Değerin ondalık karakteri olmalıdır ve binlik değerler için ayraç kullanılmamalıdır. 123456.78 gibi.</td>
 <td></td>
 </tr>
 <tr>
 <td>mevcutDonemEksikGun</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihe ait dönemdeki eksik gün sayısı</td>
 <td></td>
 </tr>
 <tr>
 <td>mevcutDonemEksikGunNeden</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihe ait dönemdeki eksik gün nedeni</td>
 <td></td>
 </tr>
 <tr>
 <td>oncekiDonemBelgeNo</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihten bir önceki döneme ait belge numarası</td>
 <td></td>
 </tr>
 <tr>
 <td>oncekiDonemUcret</td>
-<td><code>decimal?</code></td>
-<td>Çıkış yapılacak tarihten bir önceki döneme ait ücreti</td>
+<td><code>string</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait ücreti. Değerin ondalık karakteri olmalıdır ve binlik değerler için ayraç kullanılmamalıdır. 123456.78 gibi.</td>
 <td></td>
 </tr>
 <tr>
 <td>oncekiDonemIkramiye</td>
-<td><code>decimal?</code></td>
-<td>Çıkış yapılacak tarihten bir önceki döneme ait ikramiyesi</td>
+<td><code>string</code></td>
+<td>Çıkış yapılacak tarihten bir önceki döneme ait ikramiyesi. Değerin ondalık karakteri olmalıdır ve binlik değerler için ayraç kullanılmamalıdır. 123456.78 gibi.</td>
 <td></td>
 </tr>
 <tr>
 <td>oncekiDonemEksikGun</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihten bir önceki döneme ait eksik gün sayısı</td>
 <td></td>
 </tr>
 <tr>
 <td>oncekiDonemEksikGunNeden</td>
-<td><code>byte?</code></td>
+<td><code>string</code></td>
 <td>Çıkış yapılacak tarihten bir önceki döneme ait eksik gün nedeni</td>
 <td></td>
 </tr>
 <tr>
 <td>isYuzdeUsulu</td>
-<td><code>bool?</code></td>
+<td><code>string</code></td>
 <td>Sigortalı yüzde usülü çalışmışsa E , değilse H yazılmalıdır. E,H karakterleri dışında herhangi bir değer kabul edilmez. Boş bırakılırsa veya null değer gönderilirse "H" olarak işlem görür.</td>
 <td></td>
 </tr>
@@ -265,28 +265,28 @@ Theme by GitBook
 https://api.teknokanguru.com.tr/externalapi/toplu-isten-cikis-baslat</p>
 <p><strong>Örnek</strong></p>
 <pre><code>{
-  &quot;secretKey&quot;: &quot;your-secret-key&quot;,
+  &quot;secretKey&quot;: &quot;abc123xyz&quot;,
   &quot;liste&quot;: [
     {
-      &quot;sicilNo&quot;: &quot;12345&quot;,
-      &quot;nakilGidecegiSicilNo&quot;: &quot;67890&quot;,
+      &quot;sicilNo&quot;: &quot;12345678901234567890123000&quot;,
+      &quot;nakilGidecegiSicilNo&quot;: null,
       &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
-      &quot;ad&quot;: &quot;Ahmet&quot;,
-      &quot;istenCikisTarihiStr&quot;: &quot;2024-07-01&quot;,
-      &quot;ayrilisNedenKodu&quot;: 5,
+      &quot;ad&quot;: &quot;Ahmet Yılmaz&quot;,
+      &quot;istenCikisTarihi&quot;: &quot;2025-07-09&quot;,
+      &quot;ayrilisNedenKodu&quot;: &quot;16&quot;,
       &quot;csgbIsKolu&quot;: &quot;20&quot;,
-      &quot;meslekKodu&quot;: &quot;2511.01&quot;,
-      &quot;mevcutDonemBelgeNo&quot;: 1,
-      &quot;mevcutDonemUcret&quot;: 5000.75,
-      &quot;mevcutDonemIkramiye&quot;: null,
-      &quot;mevcutDonemEksikGun&quot;: null,
+      &quot;meslekKodu&quot;: &quot;2345.67&quot;,
+      &quot;mevcutDonemBelgeNo&quot;: &quot;1&quot;,
+      &quot;mevcutDonemUcret&quot;: &quot;1234.56&quot;,
+      &quot;mevcutDonemIkramiye&quot;: &quot;1234.56&quot;,
+      &quot;mevcutDonemEksikGun&quot;: &quot;0&quot;,
       &quot;mevcutDonemEksikGunNeden&quot;: null,
       &quot;oncekiDonemBelgeNo&quot;: null,
       &quot;oncekiDonemUcret&quot;: null,
       &quot;oncekiDonemIkramiye&quot;: null,
       &quot;oncekiDonemEksikGun&quot;: null,
       &quot;oncekiDonemEksikGunNeden&quot;: null,
-      &quot;isYuzdeUsulu&quot;: false
+      &quot;isYuzdeUsulu&quot;: &quot;H&quot;
     }
   ]
 }
