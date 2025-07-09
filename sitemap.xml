@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://teknokanguru.com.tr/</loc>
-         <lastmod>2025-07-08</lastmod>
+         <lastmod>2025-07-09</lastmod>
     </url>
     <url>
          <loc>https://teknokanguru.com.tr/get-ise-giris-cikis-sonuc-by-id/</loc>
-         <lastmod>2025-07-08</lastmod>
+         <lastmod>2025-07-09</lastmod>
     </url>
     <url>
          <loc>https://teknokanguru.com.tr/get-ise-giris-cikis-sonuc-by-tarih/</loc>
-         <lastmod>2025-07-08</lastmod>
+         <lastmod>2025-07-09</lastmod>
+    </url>
+    <url>
+         <loc>https://teknokanguru.com.tr/get-vizite-rapors-by-create-date/</loc>
+         <lastmod>2025-07-09</lastmod>
     </url>
     <url>
          <loc>https://teknokanguru.com.tr/toplu-ise-giris-baslat/</loc>
-         <lastmod>2025-07-08</lastmod>
+         <lastmod>2025-07-09</lastmod>
     </url>
     <url>
          <loc>https://teknokanguru.com.tr/toplu-isten-cikis-baslat/</loc>
-         <lastmod>2025-07-08</lastmod>
+         <lastmod>2025-07-09</lastmod>
     </url>
 </urlset>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>İşe Giriş/Çıkış Sonuçları (Id ile) - Kanguru Api Dokümantasyonu</title>
+<title>İşe Giriş/Çıkış Sonuçları (Id ile) - 🦘 Kanguru Api Dokümantasyonu</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
@@ -24,19 +24,35 @@
 <nav role="navigation">
 <ul class="summary">
 <li>
-<a href=".." target="_blank" class="custom-link">Kanguru Api Dokümantasyonu</a>
+<a href=".." target="_blank" class="custom-link">🦘 Kanguru Api Dokümantasyonu</a>
 </li>
 <li class="divider"></li>
 <li class="chapter" data-path="">
-<a href="..">Giriş</a>
-<li class="chapter" data-path="toplu-ise-giris-baslat/">
-<a href="../toplu-ise-giris-baslat/">Toplu İşe Giriş İşlemlerini Başlat</a>
-<li class="chapter" data-path="toplu-isten-cikis-baslat/">
-<a href="../toplu-isten-cikis-baslat/">Toplu İşten Çıkış İşlemlerini Başlat</a>
-<li class="chapter active" data-path="get-ise-giris-cikis-sonuc-by-id/">
-<a href="./">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
-<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-tarih/">
-<a href="../get-ise-giris-cikis-sonuc-by-tarih/">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<a href="..">İndeks</a>
+<li class="header">Vizite Rapor İşlemleri</li>
+
+<li>
+<a href="../get-vizite-rapors-by-create-date/" class="">Vizite Rapor Verileri (Tarih ile)</a>
+</li>
+
+<li class="header">İşe Giriş/Çıkış İşlemleri</li>
+
+<li>
+<a href="../toplu-ise-giris-baslat/" class="">Toplu İşe Giriş İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="../toplu-isten-cikis-baslat/" class="">Toplu İşten Çıkış İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="./" class="active">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+</li>
+
+<li>
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/" class="">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+</li>
+
 <li class="divider"></li>
 
 
@@ -73,9 +89,25 @@ Theme by GitBook
 
 
 
-<h2 id="get-ise-giris-cikis-sonuc-by-id-get">get-ise-giris-cikis-sonuc-by-id (GET)</h2>
+<h2 id="ise-giriscks-sonuclar-id-ile">İşe Giriş/Çıkış Sonuçları (Id ile)</h2>
+<table>
+<thead>
+<tr>
+<th>Url</th>
+<th>Metot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get-ise-giris-cikis-sonuc-by-id</td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
+<h4 id="acklama">Açıklama</h4>
 <p>Bu endpoint'i kullanarak iki tarih aralığında gönderilen bildirimlerin sonuçlarını görebilirsiniz.</p>
-<p><strong>Sorgu Parametreleri</strong></p>
+<h4 id="request">Request</h4>
+<p><strong>Query String Parametreleri</strong></p>
 <table>
 <thead>
 <tr>
@@ -99,7 +131,7 @@ Theme by GitBook
 </table>
 <p><strong>Örnek Çağrı</strong>
 https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secretkey=abc123&amp;id=1234</p>
-<p><strong>Cevap</strong></p>
+<h4 id="response">Response</h4>
 <pre><code>{
   &quot;isSuccess&quot;: true,
   &quot;errorMessage&quot;: null,
@@ -196,6 +228,7 @@ https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secr
 </tr>
 </tbody>
 </table>
+<h4 id="tanmlamalar">Tanımlamalar</h4>
 <p><strong>Status Değerleri</strong></p>
 <table>
 <thead>

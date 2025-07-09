@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Vizite Rapor Verileri (Tarih ile) - 🦘 Kanguru Api Dokümantasyonu</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".." target="_blank" class="custom-link">🦘 Kanguru Api Dokümantasyonu</a>
+</li>
+<li class="divider"></li>
+<li class="chapter" data-path="">
+<a href="..">İndeks</a>
+<li class="header">Vizite Rapor İşlemleri</li>
+
+<li>
+<a href="./" class="active">Vizite Rapor Verileri (Tarih ile)</a>
+</li>
+
+<li class="header">İşe Giriş/Çıkış İşlemleri</li>
+
+<li>
+<a href="../toplu-ise-giris-baslat/" class="">Toplu İşe Giriş İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="../toplu-isten-cikis-baslat/" class="">Toplu İşten Çıkış İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="../get-ise-giris-cikis-sonuc-by-id/" class="">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+</li>
+
+<li>
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/" class="">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+</li>
+
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+
+<section class="normal markdown-section">
+
+
+
+<h2 id="vizite-rapor-verileri-tarih-ile">Vizite Rapor Verileri (Tarih ile)</h2>
+<table>
+<thead>
+<tr>
+<th>Url</th>
+<th>Metot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get-vizite-rapors-by-create-date</td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
+<h4 id="acklama">Açıklama</h4>
+<p>Bu endpoint, belirli bir tarih aralığında oluşturulan vizite raporlarını listelemek için kullanılır. </p>
+<h4 id="request">Request</h4>
+<p><strong>Query String Parametreleri</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Açıklama</th>
+<th>Zorunlu Mu?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secretKey</td>
+<td>Size verilen firmanıza ait secretKey</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>Başlangıç tarihi. YYYY-MM-DD formatında olmalıdır.</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>finishDate</td>
+<td>Bitiş tarihi. YYYY-MM-DD formatında olmalıdır.</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Örnek Çağrı</strong></p>
+<p>https://api.teknokanguru.com.tr/externalapi/get-vizite-rapors-by-create-date?secretkey=abc123&amp;startDate=2024-12-01&amp;finishDate=2024-12-31</p>
+<h4 id="response">Response</h4>
+<p><strong>Örnek</strong></p>
+<pre><code>      {
+        &quot;isSuccess&quot;: true,
+        &quot;errorMessage&quot;: null,
+        &quot;items&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;firmaId&quot;: 1001,
+                &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
+                &quot;adSoyad&quot;: &quot;Ahmet Yılmaz&quot;,
+                &quot;raporBaslamaTarih&quot;: &quot;2024-12-01T00:00:00&quot;,
+                &quot;raporBitisTarih&quot;: &quot;2024-12-10T00:00:00&quot;,
+                &quot;isBasiTarih&quot;: &quot;2024-12-11T00:00:00&quot;,
+                &quot;polikinlikTarihi&quot;: null,
+                &quot;ekranaDusmeTarih&quot;: null,
+                &quot;izinBaslamaTarihi&quot;: null,
+                &quot;hastaneYatisTarih&quot;: null,
+                &quot;raporBaslamaTarih2&quot;: null,
+                &quot;isCeza&quot;: false,
+                &quot;kacGun&quot;: 10,
+                &quot;createDate&quot;: &quot;2024-12-01T08:30:00&quot;,
+                &quot;raporTakipNo&quot;: &quot;RT12345&quot;,
+                &quot;raporSiraNo&quot;: &quot;RS12345&quot;,
+                &quot;polikinlikNo&quot;: null,
+                &quot;polikinlikDefterSiraNo&quot;: null,
+                &quot;hastaneCikisTarih&quot;: null,
+                &quot;tahminiBebekDogumTarihi&quot;: null,
+                &quot;suAnSgkEkranindaVarMi&quot;: true,
+                &quot;sgkEkranindanCikisTarihi&quot;: null,
+                &quot;sicilAd&quot;: &quot;GENEL MERKEZ&quot;,
+                &quot;vakaTipAd&quot;: &quot;HASTALIK&quot;,
+                &quot;tesisAd&quot;: &quot;XYZ Hastanesi&quot;,
+                &quot;raporTuruAd&quot;: &quot;TEK HEKIM&quot;,
+                &quot;raporDurumuAd&quot;: &quot;KONTROL&quot;,
+                &quot;sicilSgkNo&quot;: &quot;SGK1234523543222&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><strong>Header</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSuccess</td>
+<td><code>boolean</code></td>
+<td>İşlemin başarılı olup olmadığını belirtir</td>
+</tr>
+<tr>
+<td>errorMessage</td>
+<td><code>string</code></td>
+<td>Genel hata mesajı (varsa)</td>
+</tr>
+<tr>
+<td>items</td>
+<td><code>Item[]</code></td>
+<td>Detay sonuçların listesi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Item:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Tip</th>
+<th>Açıklama</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>Raporun benzersiz kimliği.</td>
+</tr>
+<tr>
+<td>firmaId</td>
+<td>int</td>
+<td>Firmanın kimlik numarası.</td>
+</tr>
+<tr>
+<td>tcKimlikNo</td>
+<td>string</td>
+<td>Rapor sahibinin T.C. kimlik numarası.</td>
+</tr>
+<tr>
+<td>adSoyad</td>
+<td>string</td>
+<td>Rapor sahibinin adı ve soyadı.</td>
+</tr>
+<tr>
+<td>raporBaslamaTarih</td>
+<td>DateTime</td>
+<td>Raporun başlangıç tarihi.</td>
+</tr>
+<tr>
+<td>raporBitisTarih</td>
+<td>DateTime?</td>
+<td>Raporun bitiş tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>isBasiTarih</td>
+<td>DateTime?</td>
+<td>İş başı tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>polikinlikTarihi</td>
+<td>DateTime?</td>
+<td>Poliklinik tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>ekranaDusmeTarih</td>
+<td>DateTime?</td>
+<td>Ekrana düşme tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>izinBaslamaTarihi</td>
+<td>DateTime?</td>
+<td>İzin başlangıç tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>hastaneYatisTarih</td>
+<td>DateTime?</td>
+<td>Hastane yatış tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>raporBaslamaTarih2</td>
+<td>DateTime?</td>
+<td>Raporun ikinci başlangıç tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>isCeza</td>
+<td>bool</td>
+<td>Ceza durumu (true/false).</td>
+</tr>
+<tr>
+<td>kacGun</td>
+<td>short?</td>
+<td>Kaç gün süreceği (opsiyonel).</td>
+</tr>
+<tr>
+<td>createDate</td>
+<td>DateTime</td>
+<td>TeknoKanguru sistemine düşme tarihi.</td>
+</tr>
+<tr>
+<td>raporTakipNo</td>
+<td>string</td>
+<td>Raporun takip numarası.</td>
+</tr>
+<tr>
+<td>raporSiraNo</td>
+<td>string</td>
+<td>Raporun sıra numarası.</td>
+</tr>
+<tr>
+<td>polikinlikNo</td>
+<td>string</td>
+<td>Poliklinik numarası.</td>
+</tr>
+<tr>
+<td>polikinlikDefterSiraNo</td>
+<td>string</td>
+<td>Poliklinik defter sıra numarası.</td>
+</tr>
+<tr>
+<td>hastaneCikisTarih</td>
+<td>DateTime?</td>
+<td>Hastane çıkış tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>tahminiBebekDogumTarihi</td>
+<td>DateTime?</td>
+<td>Tahmini bebek doğum tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>suAnSgkEkranindaVarMi</td>
+<td>bool</td>
+<td>Şu an SGK ekranında var mı (true/false).</td>
+</tr>
+<tr>
+<td>sgkEkranindanCikisTarihi</td>
+<td>DateTime?</td>
+<td>SGK ekranından çıkış tarihi (opsiyonel).</td>
+</tr>
+<tr>
+<td>sicilAd</td>
+<td>string</td>
+<td>Teknokanguru sisteminde kayıtlı sicilin adı.</td>
+</tr>
+<tr>
+<td>vakaTipAd</td>
+<td>string</td>
+<td>Vaka tipi adı. IS KAZASI | HASTALIK | ANALIK | ARSIV</td>
+</tr>
+<tr>
+<td>tesisAd</td>
+<td>string</td>
+<td>Tesis adı.</td>
+</tr>
+<tr>
+<td>raporTuruAd</td>
+<td>string</td>
+<td>Rapor türü adı. HEYET | TEK HEKIM</td>
+</tr>
+<tr>
+<td>raporDurumuAd</td>
+<td>string</td>
+<td>Rapor durumu adı.</td>
+</tr>
+<tr>
+<td>sicilSgkNo</td>
+<td>string</td>
+<td>Teknokanguru sisteminde kayıtlı sicilin SGK numarası.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+</body>
+</html>

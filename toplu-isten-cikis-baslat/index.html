@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>Toplu İşten Çıkış İşlemlerini Başlat - Kanguru Api Dokümantasyonu</title>
+<title>Toplu İşten Çıkış İşlemlerini Başlat - 🦘 Kanguru Api Dokümantasyonu</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
@@ -24,19 +24,35 @@
 <nav role="navigation">
 <ul class="summary">
 <li>
-<a href=".." target="_blank" class="custom-link">Kanguru Api Dokümantasyonu</a>
+<a href=".." target="_blank" class="custom-link">🦘 Kanguru Api Dokümantasyonu</a>
 </li>
 <li class="divider"></li>
 <li class="chapter" data-path="">
-<a href="..">Giriş</a>
-<li class="chapter" data-path="toplu-ise-giris-baslat/">
-<a href="../toplu-ise-giris-baslat/">Toplu İşe Giriş İşlemlerini Başlat</a>
-<li class="chapter active" data-path="toplu-isten-cikis-baslat/">
-<a href="./">Toplu İşten Çıkış İşlemlerini Başlat</a>
-<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-id/">
-<a href="../get-ise-giris-cikis-sonuc-by-id/">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
-<li class="chapter" data-path="get-ise-giris-cikis-sonuc-by-tarih/">
-<a href="../get-ise-giris-cikis-sonuc-by-tarih/">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<a href="..">İndeks</a>
+<li class="header">Vizite Rapor İşlemleri</li>
+
+<li>
+<a href="../get-vizite-rapors-by-create-date/" class="">Vizite Rapor Verileri (Tarih ile)</a>
+</li>
+
+<li class="header">İşe Giriş/Çıkış İşlemleri</li>
+
+<li>
+<a href="../toplu-ise-giris-baslat/" class="">Toplu İşe Giriş İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="./" class="active">Toplu İşten Çıkış İşlemlerini Başlat</a>
+</li>
+
+<li>
+<a href="../get-ise-giris-cikis-sonuc-by-id/" class="">İşe Giriş/Çıkış Sonuçları (Id ile)</a>
+</li>
+
+<li>
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/" class="">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+</li>
+
 <li class="divider"></li>
 
 
@@ -73,12 +89,27 @@ Theme by GitBook
 
 
 
-<h2 id="toplu-isten-cikis-baslat-post">toplu-isten-cikis-baslat (POST)</h2>
-<hr />
-<p>Bu endpoint'i kullanarak toplu işten çıkış işlemlerini yapabilirsiniz. Gönderdiğiniz veriler SGK'ya gönderilmeden önce bir dizi validasyon işlemlerinden geçecektir. Eğer verilerinizde bir hata ile karşılaşılırsa bu geri dönen cevapta 103 durum kodu ve hata içeriği ile beraber bildirilecektir. Eğer daha önce gönderdiğiniz ve başarılı ile SGK'ya girişi tamamlanmış verileri tekrar gönderirseniz Kanguru sistemi bunları göz ardı edece ve dönen cevapta ignoreCount içinde size bildirecektir.</p>
+<h2 id="toplu-isten-cks-islemlerini-baslat">Toplu İşten Çıkış İşlemlerini Başlat</h2>
+<table>
+<thead>
+<tr>
+<th>Url</th>
+<th>Metot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toplu-isten-cikis-baslat</td>
+<td>POST</td>
+</tr>
+</tbody>
+</table>
+<h4 id="acklama">Açıklama</h4>
+<p>Bu endpoint'i kullanarak toplu işten çıkış işlemlerini yapabilirsiniz. Gönderdiğiniz veriler SGK'ya gönderilmeden önce bir dizi validasyon işlemlerinden geçecektir. Eğer verilerinizde bir hata ile karşılaşılırsa bu geri dönen cevapta 103 durum kodu ve hata içeriği ile beraber bildirilecektir. Eğer daha önce gönderdiğiniz ve başarılı ile SGK'ya girişi tamamlanmış verileri tekrar gönderirseniz Kanguru sistemi bunları göz ardı edecek ve dönen cevapta ignoreCount içinde size bildirecektir.</p>
 <p>Bu aşamadaki "success" kavramı "Personel SGK'ya başarıyla bildirildi" anlamında değildir. "Kanguru'ya başarılı ile teslim edildi, validasyonlardan  geçti ve SGK'ya bildirilmeye hazır" anlamına gelmektedir. Kanguru kendisine iletilen iş taleplerini bir kuyruğa alır ve asenkron olarak çeşitli süreçlerde bu işlemler gerçekleşir. Verinin gönderildiği andaki sistem yoğunluğu, SGK sunucularının durumu,  listenin büyüklüğü süreleri etkiler. SGK'ya bildirilen işlerin sonucunu bu işlemin cevabında id'yi kullanarak get-ise-giris-cikis-sonuc-by-id endpoint'i üzerinden veya bildirim tarihi aralığı vererek get-ise-giris-cikis-sonuc-by-tarih endpoint'i öğrnebilirsiniz.</p>
-<h5 id="post-parametreleri">Post Parametreleri</h5>
-<h6 id="header">Header:</h6>
+<h4 id="request">Request</h4>
+<p><strong>Post Parametreleri</strong></p>
+<p><strong>Header:</strong></p>
 <table>
 <thead>
 <tr>
@@ -103,7 +134,7 @@ Theme by GitBook
 </tr>
 </tbody>
 </table>
-<h6 id="item">Item</h6>
+<p><strong>Item</strong></p>
 <table>
 <thead>
 <tr>
@@ -230,9 +261,9 @@ Theme by GitBook
 </tr>
 </tbody>
 </table>
-<h5 id="request">Request</h5>
-<p>https://api.teknokanguru.com.tr/externalapi/toplu-isten-cikis-baslat</p>
-<h6 id="ornek">Örnek</h6>
+<p><strong>Örnek Post Url'i</strong>
+https://api.teknokanguru.com.tr/externalapi/toplu-isten-cikis-baslat</p>
+<p><strong>Örnek</strong></p>
 <pre><code>{
   &quot;secretKey&quot;: &quot;your-secret-key&quot;,
   &quot;liste&quot;: [
@@ -260,7 +291,8 @@ Theme by GitBook
   ]
 }
 </code></pre>
-<h6 id="response">Response</h6>
+<h4 id="response">Response</h4>
+<p><strong>Örnek:</strong></p>
 <pre><code>{
   &quot;id&quot;: 98765,
   &quot;isSuccess&quot;: true,
