@@ -106,7 +106,7 @@ Theme by GitBook
 </table>
 <h4 id="acklama">Açıklama</h4>
 <p>Bu endpoint'i kullanarak toplu işten çıkış işlemlerini yapabilirsiniz. Gönderdiğiniz veriler SGK'ya gönderilmeden önce bir dizi validasyon işlemlerinden geçecektir. Eğer verilerinizde bir hata ile karşılaşılırsa bu geri dönen cevapta 103 durum kodu ve hata içeriği ile beraber bildirilecektir. Eğer daha önce gönderdiğiniz ve başarılı ile SGK'ya girişi tamamlanmış verileri tekrar gönderirseniz Kanguru sistemi bunları göz ardı edecek ve dönen cevapta ignoreCount içinde size bildirecektir.</p>
-<p>Bu aşamadaki "success" kavramı "Personel SGK'ya başarıyla bildirildi" anlamında değildir. "Kanguru'ya başarılı ile teslim edildi, validasyonlardan  geçti ve SGK'ya bildirilmeye hazır" anlamına gelmektedir. Kanguru kendisine iletilen iş taleplerini bir kuyruğa alır ve asenkron olarak çeşitli süreçlerde bu işlemler gerçekleşir. Verinin gönderildiği andaki sistem yoğunluğu, SGK sunucularının durumu,  listenin büyüklüğü süreleri etkiler. SGK'ya bildirilen işlerin sonucunu bu işlemin cevabında id'yi kullanarak get-ise-giris-cikis-sonuc-by-id endpoint'i üzerinden veya bildirim tarihi aralığı vererek get-ise-giris-cikis-sonuc-by-tarih endpoint'i öğrnebilirsiniz.</p>
+<p>Bu aşamadaki "success" kavramı "Personel SGK'ya başarıyla bildirildi" anlamında değildir. "Kanguru'ya başarılı ile teslim edildi, validasyonlardan geçti ve SGK'ya bildirilmeye hazır" anlamına gelmektedir. Kanguru kendisine iletilen iş taleplerini bir kuyruğa alır ve asenkron olarak çeşitli süreçlerde bu işlemler gerçekleşir. Verinin gönderildiği andaki sistem yoğunluğu, SGK sunucularının durumu, listenin büyüklüğü süreleri etkiler. SGK'ya bildirilen işlerin sonucunu bu işlemin cevabında id'yi kullanarak get-ise-giris-cikis-sonuc-by-id endpoint'i üzerinden veya bildirim tarihi aralığı vererek get-ise-giris-cikis-sonuc-by-tarih endpoint'i öğrnebilirsiniz.</p>
 <h4 id="request">Request</h4>
 <p><strong>Post Parametreleri</strong></p>
 <p><strong>Header:</strong></p>
@@ -131,6 +131,12 @@ Theme by GitBook
 <td><code>Item[]</code></td>
 <td>İşten çıkış detaylarının listesi</td>
 <td>✔️</td>
+</tr>
+<tr>
+<td>isForTest</td>
+<td><code>bool</code></td>
+<td>SGK'ya gönderimin yapılıp yapılmayacağı (Boş bırakılırsa false değeri alır)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -178,7 +184,7 @@ Theme by GitBook
 <tr>
 <td>ayrilisNedenKodu</td>
 <td><code>string</code></td>
-<td>Ayrılış nedeni kodu 1-50 arası bir değer olmalıdır.  Detaylarını aşağıda görebilirsiniz.</td>
+<td>Ayrılış nedeni kodu 1-50 arası bir değer olmalıdır. Detaylarını aşağıda görebilirsiniz.</td>
 <td>✔️</td>
 </tr>
 <tr>
@@ -190,7 +196,7 @@ Theme by GitBook
 <tr>
 <td>meslekKodu</td>
 <td><code>string</code></td>
-<td>Sigortalının meslek kodudur. Nokta ve sayılardan oluşan 7 karakterli sayısal değerdir. İlk dört karakter sayısal değerdir. Beşinci karakter nokta olup sonraki iki karakter de sayısal değerdir.  Örnek  : 3258.02</td>
+<td>Sigortalının meslek kodudur. Nokta ve sayılardan oluşan 7 karakterli sayısal değerdir. İlk dört karakter sayısal değerdir. Beşinci karakter nokta olup sonraki iki karakter de sayısal değerdir. Örnek : 3258.02</td>
 <td>✔️</td>
 </tr>
 <tr>
