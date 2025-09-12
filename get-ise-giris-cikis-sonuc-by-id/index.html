@@ -142,7 +142,10 @@ https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secr
       &quot;errorMessage&quot;: null,
       &quot;referansNo&quot;: &quot;REF123456&quot;,
       &quot;bildirimId&quot;: 111,
-      &quot;isGiris&quot;: true
+      &quot;isGiris&quot;: true,
+      &quot;sicilNo&quot;:&quot;111111111111111&quot;,
+      &quot;sicilAd&quot;:&quot;Test&quot;,
+      &quot;kayitTarihi&quot;:&quot;2024-09-09T00:00:00&quot;
     },
     {
       &quot;tcKimlikNo&quot;: &quot;10987654321&quot;,
@@ -150,7 +153,10 @@ https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secr
       &quot;errorMessage&quot;: &quot;lorem ipsum&quot;,
       &quot;referansNo&quot;: null,
       &quot;bildirimId&quot;: 1234,
-      &quot;isGiris&quot;: false
+      &quot;isGiris&quot;: false,
+      &quot;sicilNo&quot;:&quot;111111111111111&quot;,
+      &quot;sicilAd&quot;:&quot;Test&quot;,
+      &quot;kayitTarihi&quot;:&quot;2024-09-09T00:00:00&quot;
     }
   ]
 }
@@ -226,6 +232,16 @@ https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-id?secr
 <td>kayitTarihi</td>
 <td><code>date</code></td>
 <td>Bildirimin kayıt tarihi</td>
+</tr>
+<tr>
+<td>sicilNo</td>
+<td><code>string</code></td>
+<td>Bildirim yapılan işyerinin sicil numarası</td>
+</tr>
+<tr>
+<td>sicilAd</td>
+<td><code>string</code></td>
+<td>Bildirim yapılan işyerinin Kanguru sistemindeki ismi</td>
 </tr>
 </tbody>
 </table>
