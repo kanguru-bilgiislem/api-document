@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>İşe Giriş/Çıkış Sonuçları (Tarih ile) - 🦘 Kanguru Api Dokümantasyonu</title>
+<title>SGK İşten Çıkış Raporu - 🦘 Kanguru Api Dokümantasyonu</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
@@ -42,7 +42,7 @@
 </li>
 
 <li>
-<a href="../firma-isten-cikis-rapor/" class="">SGK İşten Çıkış Raporu</a>
+<a href="./" class="active">SGK İşten Çıkış Raporu</a>
 </li>
 
 <li>
@@ -58,7 +58,7 @@
 </li>
 
 <li>
-<a href="./" class="active">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
+<a href="../get-ise-giris-cikis-sonuc-by-tarih/" class="">İşe Giriş/Çıkış Sonuçları (Tarih ile)</a>
 </li>
 
 <li class="divider"></li>
@@ -97,7 +97,7 @@ Theme by GitBook
 
 
 
-<h2 id="ise-giriscks-sonuclar-tarih-ile">İşe Giriş/Çıkış Sonuçları (Tarih ile)</h2>
+<h2 id="sgk-isten-cks-raporu">SGK İşten Çıkış Raporu</h2>
 <table>
 <thead>
 <tr>
@@ -107,14 +107,13 @@ Theme by GitBook
 </thead>
 <tbody>
 <tr>
-<td>get-ise-giris-cikis-sonuc-by-tarih</td>
+<td>firma-isten-cikis-rapor</td>
 <td>GET</td>
 </tr>
 </tbody>
 </table>
 <h4 id="acklama">Açıklama</h4>
-<p>Bu endpoint'i kullanarak bir bildirim içindeki SGK'ya gönderilen işe giriş/çıkışların sonuçlarını görebilirsiniz.</p>
-<p><strong>Bu endpoint ile sadece bildirim yaptığınız kayıtları takip edebilirsiniz. Tüm giriş ve çıkış raporlarını almak isterseniz <code>SGK İşe Giriş Raporu</code> ve <code>SGK İşten Çıkış Raporu</code> endpointlerini kullanmanız gerekmektedir.</strong></p>
+<p>Bu endpoint'i kullanarak SGK'ya yapılan işten çıkış işlemlerini takip edebilirsiniz.</p>
 <h4 id="request">Request</h4>
 <p><strong>Query String Parametreleri</strong></p>
 <table>
@@ -141,37 +140,34 @@ Theme by GitBook
 <td>Bitiş tarihi. YYYY-MM-DD formatında olmalıdır.</td>
 <td>✔️</td>
 </tr>
+<tr>
+<td>tarihTip</td>
+<td>S,E veya K değeri alabilir. Bu değere göre tarih filtreleri farklı çalışacaktır. S: (İşten Çıkış Tarihi) E: İşlem (Evrak) Tarihi K: Kanguru sistemine düşme tarihi</td>
+<td>✔️</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Örnek Çağrı</strong>
-https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-tarih?secretkey=abc123&amp;startDate=2024-12-01&amp;finishDate=2024-12-31</p>
+https:/api.teknokanguru.com.tr/externalapi/firma-isten-cikis-rapor?secretKey=XXXXXXXX&amp;startDate=2025-09-01&amp;finishDate=2026-09-17&amp;tarihTip=S</p>
 <h4 id="response">Response</h4>
 <p><strong>Örnek</strong></p>
 <pre><code>{
   &quot;isSuccess&quot;: true,
   &quot;errorMessage&quot;: null,
   &quot;items&quot;: [
-    {
+     {
+      &quot;sicil&quot;: &quot;ABC&quot;,
+      &quot;sicilNo&quot;: &quot;12345678901234567890123&quot;,
+      &quot;grup&quot;: &quot;İSTANBUL&quot;,
+      &quot;adSoyad&quot;: &quot;MEHMET KAYA&quot;,
       &quot;tcKimlikNo&quot;: &quot;12345678901&quot;,
-      &quot;statusId&quot;: 104,
-      &quot;errorMessage&quot;: null,
-      &quot;referansNo&quot;: &quot;REF123456&quot;,
-      &quot;bildirimId&quot;: 111,
-      &quot;isGiris&quot;: true,
-      &quot;sicilNo&quot;:&quot;111111111111111&quot;,
-      &quot;sicilAd&quot;:&quot;Test&quot;,
-      &quot;kayitTarihi&quot;:&quot;2024-09-09T00:00:00&quot;
-    },
-    {
-      &quot;tcKimlikNo&quot;: &quot;10987654321&quot;,
-      &quot;statusId&quot;: 105,
-      &quot;errorMessage&quot;: &quot;lorem ipsum&quot;,
-      &quot;referansNo&quot;: null,
-      &quot;bildirimId&quot;: 1234,
-      &quot;isGiris&quot;: false,
-      &quot;sicilNo&quot;:&quot;111111111111111&quot;,
-      &quot;sicilAd&quot;:&quot;Test&quot;,
-      &quot;kayitTarihi&quot;:&quot;2024-09-09T00:00:00&quot;
+      &quot;meslekKod&quot;: &quot;5242.10&quot;,
+      &quot;meslekAd&quot;: &quot;Satış Danışmanı / Uzmanı Yardımcısı&quot;,
+      &quot;referansNo&quot;: &quot;123456789&quot;,
+      &quot;istenCikisTarihi&quot;: &quot;2025-09-13T00:00:00&quot;,
+      &quot;istenCikisKodu&quot;: 3,
+      &quot;islemTarihi&quot;: &quot;2025-09-15T00:00:00&quot;,
+      &quot;createDate&quot;: &quot;2025-09-16T11:25:57.187&quot;
     }
   ]
 }
@@ -214,77 +210,64 @@ https://api.teknokanguru.com.tr/externalapi/get-ise-giris-cikis-sonuc-by-tarih?s
 </thead>
 <tbody>
 <tr>
-<td>tcKimlikNo</td>
+<td>sicil</td>
 <td><code>string</code></td>
-<td>Kişinin T.C. Kimlik numarası</td>
-</tr>
-<tr>
-<td>statusId</td>
-<td><code>integer</code></td>
-<td>İşlem sonucu durum kodu (Detayı aşağıda)</td>
-</tr>
-<tr>
-<td>errorMessage</td>
-<td><code>string</code></td>
-<td>Kişiye özel hata mesajı (varsa)</td>
-</tr>
-<tr>
-<td>referansNo</td>
-<td><code>string</code></td>
-<td>Bildirime ait SGK'dan verilen referans numarası</td>
-</tr>
-<tr>
-<td>bildirimId</td>
-<td><code>integer</code></td>
-<td>Sistem tarafındaki bildirim ID’si</td>
-</tr>
-<tr>
-<td>isGiris</td>
-<td><code>boolean</code></td>
-<td><code>true</code>: Giriş bildirimi, <code>false</code>: Çıkış bildirimi</td>
-</tr>
-<tr>
-<td>kayitTarihi</td>
-<td><code>date</code></td>
-<td>Bildirimin kayıt tarihi</td>
+<td>Personelin çıkış yaptığı işyerinin Kanguru sistemindeki adı</td>
 </tr>
 <tr>
 <td>sicilNo</td>
 <td><code>string</code></td>
-<td>Bildirim yapılan işyerinin sicil numarası</td>
+<td>Personelin çıkış yaptığı işyerinin SGK sicil nosu</td>
 </tr>
 <tr>
-<td>sicilAd</td>
+<td>grup</td>
 <td><code>string</code></td>
-<td>Bildirim yapılan işyerinin Kanguru sistemindeki ismi</td>
-</tr>
-</tbody>
-</table>
-<h4 id="tanmlamalar">Tanımlamalar</h4>
-<p><strong>Status Değerleri</strong></p>
-<table>
-<thead>
-<tr>
-<th>StatusId</th>
-<th>Açıklama</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>102</td>
-<td>Henüz SGK'ya bildirilmedi</td>
+<td>Personelin çıkış yaptığı işyerinin Kanguru sistemindeki grubu</td>
 </tr>
 <tr>
-<td>103</td>
-<td>Veri tutarlığı kontrolünde Hata Aldı</td>
+<td>adSoyad</td>
+<td><code>string</code></td>
+<td>Personelin adı ve soyadı</td>
 </tr>
 <tr>
-<td>104</td>
-<td>SGK'ya başarıyla bildirildi</td>
+<td>tcKimlikNo</td>
+<td><code>string</code></td>
+<td>Türkiye Cumhuriyeti kimlik numarası (11 haneli)</td>
 </tr>
 <tr>
-<td>105</td>
-<td>SGK sisteminde hata aldı</td>
+<td>meslekKod</td>
+<td><code>string</code></td>
+<td>Meslek kodu (örn. 5242.10)</td>
+</tr>
+<tr>
+<td>meslekAd</td>
+<td><code>string</code></td>
+<td>Meslek adı (örn. Satış Danışmanı / Uzmanı Yardımcısı)</td>
+</tr>
+<tr>
+<td>referansNo</td>
+<td><code>string</code></td>
+<td>İşten çıkış işleminin SGK tarafından verilen referans numarası</td>
+</tr>
+<tr>
+<td>istenCikisTarihi</td>
+<td><code>datetime</code></td>
+<td>İşten çıkış tarihi</td>
+</tr>
+<tr>
+<td>istenCikisKodu</td>
+<td><code>integer</code></td>
+<td>İşten çıkış nedeni kodu</td>
+</tr>
+<tr>
+<td>islemTarihi</td>
+<td><code>datetime</code></td>
+<td>SGK tarafında çıkış işleminin yapıldığı tarih (Evrak Tarihi)</td>
+</tr>
+<tr>
+<td>createDate</td>
+<td><code>datetime</code></td>
+<td>Çıkışın Kanguru sistemine düşme tarihi</td>
 </tr>
 </tbody>
 </table>
